@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<title>CheckIPClient</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBEzdHSBDAPZbcRq7Ua6EP81vsSJo2_4VA",
+    authDomain: "getip-d1124.firebaseapp.com",
+    databaseURL: "https://getip-d1124.firebaseio.com",
+    projectId: "getip-d1124",
+    storageBucket: "getip-d1124.appspot.com",
+    messagingSenderId: "389959378406"
+  };
+  
+  firebase.initializeApp(config);
+  var database = firebase.database();
+  
+    function updateIP(data){
+        document.getElementById("myIP").innerText =data.ip;
+        document.getElementById("myTime").innerText =data.time;
+    }
+
+    var temp = database.ref('IPWork')
+    temp.on('value', function(snapshot) {
+        updateIP(snapshot.val());
+    });
+
+    function init(){
+        document.getElementById("error").innerText ="Test Script";
+    }
+
+</script>
+<body onload="init()">
+    <div style="width: 100%;text-align: center">
+        <h1>Your IP Address:</h1>
+        <h1 id="myIP"></h1>
+        <h2>Last IP Change:</h2>
+        <h2><span id="myTime"></span></h2>
+        <div>
+            <span id="error"></span>
+        </div>
+    </div>
+</body>
+</html>
