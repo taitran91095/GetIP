@@ -29,7 +29,7 @@ var intervalCall = function intervalCall() {
 	});
 	setTimeout(function() {
 		intervalCall();
-	}, 10000);
+	}, 300000);
 }
 
 firebase.auth().signInAnonymously().then(function() {
