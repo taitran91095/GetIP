@@ -1,5 +1,11 @@
 const publicIp = require('public-ip');
 var firebase = require('firebase');
+var http = require('http'); 
+var request = require('request'); 
+var username = "heocon91095@gmail.com";
+var password = "asdasdasd";
+var hostname = "sal.ddns01.com";
+
 var app = firebase.initializeApp({
 	apiKey: "AIzaSyBEzdHSBDAPZbcRq7Ua6EP81vsSJo2_4VA",
 	authDomain: "getip-d1124.firebaseapp.com",
@@ -21,11 +27,21 @@ var writeData = function writeData(time, ip) {
 	}
 }
 
+function buildAPI(ip){
+	var api = "https://"+username+":"+password+"@www.dnsdynamic.org/api/?hostname="+hostname+"&myip="+ip;
+	request({
+		url:api
+	},function(error,response,body){
+		console.log(response.statusCode);
+	})
+}
+
 var intervalCall = function intervalCall() {
 	clearTimeout();
 	publicIp.v4().then(ip => {
 		console.log(new Date().toString() + ": " + ip);
 		writeData(new Date(), ip);
+		buildAPI(ip);
 	});
 	setTimeout(function() {
 		intervalCall();
