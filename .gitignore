@@ -57,10 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 
-node_modules/async/lib/async.js
-node_modules/async/.travis.yml
-node_modules/async/bower.json
-node_modules/async/component.json
-node_modules/async/lib/async.js
-node_modules/async/LICENSE
-node_modules/async/package.json
+node_modules
